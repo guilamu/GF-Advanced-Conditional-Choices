@@ -1,0 +1,182 @@
+# Copyright (C) 2026 Guilamu
+# This file is distributed under the AGPL-3.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: GF Advanced Conditional Choices 1.0.0\n"
+"Report-Msgid-Bugs-To: https://github.com/guilamu/gf-advanced-conditional-choices/issues\n"
+"POT-Creation-Date: 2026-02-02T00:00:00+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Plugin Name of the plugin
+msgid "GF Advanced Conditional Choices"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://github.com/guilamu/gf-advanced-conditional-choices"
+msgstr ""
+
+#. Description of the plugin
+msgid "Add conditional logic to individual choices in Radio, Checkbox, Dropdown, and Multi-Select fields."
+msgstr ""
+
+#. Author of the plugin
+msgid "Guilamu"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://github.com/guilamu"
+msgstr ""
+
+#: gf-advanced-conditional-choices.php
+msgid "GF Advanced Conditional Choices requires Gravity Forms version %s or higher. Please update Gravity Forms."
+msgstr ""
+
+#: gf-advanced-conditional-choices.php
+msgid "🐛 Report a Bug"
+msgstr ""
+
+#: gf-advanced-conditional-choices.php
+msgid "🐛 Report a Bug (install Bug Reporter)"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "is"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "is not"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "contains"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "starts with"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "ends with"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "greater than"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "less than"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "greater or equal"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "less or equal"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "is empty"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "is not empty"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Conditional Logic for choice"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Enable conditional logic for this choice"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Show"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Hide"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "this choice if"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "of the following match:"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "All"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Any"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "— Select Field —"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Value"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Add Rule"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Cancel"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Save Logic"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Configure Choice Logic"
+msgstr ""
+
+#: class-gf-acc.php
+msgid "Please select a valid option."
+msgstr ""
+
+#: class-gf-acc.php
+msgid "No options available. Please adjust your previous selections."
+msgstr ""
+
+#: includes/class-field-settings.php
+msgid "Choice Conditional Logic"
+msgstr ""
+
+#: includes/class-field-settings.php
+msgid "Configure conditions to show or hide this individual choice based on values from other fields."
+msgstr ""
+
+#: includes/class-server-validation.php
+msgid "Please select a valid option."
+msgstr ""
+
+#: includes/class-server-validation.php
+msgid "No options available. Please adjust your previous selections."
+msgstr ""
+
+#: includes/class-github-updater.php
+msgid "Unable to rename the update folder. Please retry or update manually."
+msgstr ""
+
+#: includes/class-github-updater.php
+msgid "More information about %s"
+msgstr ""
+
+#: includes/class-github-updater.php
+msgid "View details"
+msgstr ""

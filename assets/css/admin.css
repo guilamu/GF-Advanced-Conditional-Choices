@@ -1,0 +1,677 @@
+/**
+ * GF Advanced Conditional Choices - Admin Styles
+ *
+ * Styles for the form editor UI and flyout modal.
+ * Styled to match Gravity Forms native conditional logic flyout.
+ */
+
+/* ==========================================================================
+   Choice Logic Button
+   ========================================================================== */
+
+.gf-acc-btn {
+    background: #fff !important;
+    border: 1px solid #c3c5db !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+    color: #8c8f94;
+    margin: auto 0.3125rem;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    min-height: 2.25rem;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    transition: all 0.2s ease;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 10;
+    box-sizing: border-box;
+}
+
+.gf-acc-btn:hover,
+.gf-acc-btn:focus {
+    color: #3e7da6;
+    border-color: #3e7da6 !important;
+    outline: none;
+}
+
+/* Active state - filled blue background */
+.gf-acc-btn.active {
+    background: #3e7da6 !important;
+    border-color: #3e7da6 !important;
+    color: #fff;
+}
+
+.gf-acc-btn.active:hover,
+.gf-acc-btn.active:focus {
+    background: #2d6285 !important;
+    border-color: #2d6285 !important;
+    color: #fff;
+}
+
+/* White icon when active */
+.gf-acc-btn.active .dashicons {
+    color: #fff;
+}
+
+.gf-acc-btn .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+/* Badge for rule count */
+.gf-acc-btn .acc-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #3e7da6;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    text-align: center;
+    border-radius: 9px;
+    padding: 0 5px;
+    pointer-events: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================================================
+   Modal Overlay - GF Flyout Style
+   ========================================================================== */
+
+#gf-acc-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99998;
+    opacity: 0;
+    animation: accOverlayFadeIn 190ms ease-in-out forwards;
+}
+
+@keyframes accOverlayFadeIn {
+    to { opacity: 1; }
+}
+
+/* ==========================================================================
+   Modal Panel - GF Style
+   ========================================================================== */
+
+#gf-acc-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    max-width: calc(100vw - 40px);
+    max-height: calc(100vh - 80px);
+    background: #fff;
+    z-index: 99999;
+    box-shadow: 0 0 1px rgba(18,25,97,.24), 
+                0 24px 24px rgba(18,25,97,.03), 
+                0 2px 2px rgba(18,25,97,.03), 
+                0 4px 4px rgba(18,25,97,.03), 
+                0 8px 8px rgba(18,25,97,.03), 
+                0 16px 16px rgba(18,25,97,.03);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 4px;
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0;
+    animation: accModalFadeIn 190ms ease-in-out forwards;
+}
+
+@keyframes accModalFadeIn {
+    to { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Modal closing animation */
+#gf-acc-modal.closing {
+    animation: accModalFadeOut 190ms ease-in-out forwards;
+}
+
+@keyframes accModalFadeOut {
+    from { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    to { 
+        transform: translate(-50%, -50%) scale(0.95);
+        opacity: 0;
+    }
+}
+
+#gf-acc-modal-overlay.closing {
+    animation: accOverlayFadeOut 190ms ease-in-out forwards;
+}
+
+@keyframes accOverlayFadeOut {
+    to { opacity: 0; }
+}
+
+/* Flyout Header - GF Style */
+.gf-acc-modal-header {
+    padding: 1.25rem 1.5625rem;
+    position: relative;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.gf-acc-modal-header::after {
+    background: #ecedf8;
+    bottom: 0;
+    content: '';
+    height: 0.0625rem;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.gf-acc-modal-header h2 {
+    margin: 0;
+    color: #242748;
+    font-size: 13px;
+    height: 18px;
+    line-height: 1.188rem;
+    text-align: left;
+    padding-right: 2rem;
+    white-space: nowrap;
+}
+
+.gf-acc-modal-header h2 .choice-label {
+    display: inline;
+    font-size: 13px;
+}
+
+/* Close Button - GF Circular Style (X button in header only) */
+.gf-acc-modal-header .gf-acc-close-modal {
+    align-items: center;
+    background: #fff;
+    border: 1px solid #d5d7e9;
+    border-radius: 100%;
+    box-shadow: 0 2px 2px rgba(58,58,87,.06);
+    color: #3e7da6;
+    cursor: pointer;
+    display: flex;
+    height: 1.625rem;
+    justify-content: center;
+    outline: 0;
+    position: absolute;
+    right: 1.5625rem;
+    top: 1rem;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    width: 1.625rem;
+    padding: 0;
+    line-height: 1;
+}
+
+.gf-acc-modal-header .gf-acc-close-modal .gform-icon {
+    font-size: 1.875rem;
+}
+
+.gf-acc-modal-header .gf-acc-close-modal:hover,
+.gf-acc-modal-header .gf-acc-close-modal:focus {
+    border-color: #3e7da6;
+    color: #3e7da6;
+    outline: none;
+}
+
+/* Flyout Body - GF Style */
+.gf-acc-modal-body {
+    font-size: 0.8125rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 1.25rem 1.5625rem;
+    flex-grow: 1;
+    color: #242748;
+}
+
+/* Modal Footer - GF Style */
+.gf-acc-modal-footer {
+    padding: 1.25rem 1.5625rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    background: #fff;
+    border-radius: 0 0 4px 4px;
+    gap: 1rem;
+}
+
+.gf-acc-modal-footer::before {
+    background: #ecedf8;
+    top: 0;
+    content: '';
+    height: 0.0625rem;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+.gf-acc-modal-footer .button {
+    margin: 0 !important;
+    flex-shrink: 0;
+    white-space: nowrap;
+    display: inline-block !important;
+    padding: 0 10px !important;
+    min-height: 30px !important;
+    line-height: 28px !important;
+    font-size: 13px !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    box-sizing: border-box !important;
+}
+
+/* Footer buttons styled to match GF */
+.gf-acc-modal-footer .button-secondary,
+.gf-acc-modal-footer .button.gf-acc-close-modal {
+    background: #fff !important;
+    border-color: #c3c5db !important;
+    color: #242748 !important;
+    order: -1; /* Ensure cancel button appears first/left */
+}
+
+.gf-acc-modal-footer .button-secondary:hover,
+.gf-acc-modal-footer .button-secondary:focus,
+.gf-acc-modal-footer .button.gf-acc-close-modal:hover,
+.gf-acc-modal-footer .button.gf-acc-close-modal:focus {
+    background: #f6f9fc !important;
+    border-color: #3e7da6 !important;
+    color: #3e7da6 !important;
+}
+
+.gf-acc-modal-footer .button-primary,
+.gf-acc-modal-footer #acc-save-logic {
+    background: #3e7da6 !important;
+    border-color: #3e7da6 !important;
+    color: #fff !important;
+}
+
+.gf-acc-modal-footer .button-primary:hover,
+.gf-acc-modal-footer .button-primary:focus,
+.gf-acc-modal-footer #acc-save-logic:hover,
+.gf-acc-modal-footer #acc-save-logic:focus {
+    background: #2d6285 !important;
+    border-color: #2d6285 !important;
+}
+
+/* ==========================================================================
+   Enable Toggle - Gravity Forms Style
+   ========================================================================== */
+
+.acc-enable-row {
+    margin-bottom: 22px;
+}
+
+.acc-toggle-label {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #242748;
+    margin-bottom: 8px;
+}
+
+/* Toggle Switch Wrapper - using label for clickability */
+.acc-toggle-switch {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+/* Hidden Checkbox */
+.acc-toggle-switch input[type="checkbox"] {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+}
+
+/* Toggle Container - GF .gform-field__toggle-container style */
+.acc-toggle-slider {
+    background: #9092b2; /* GF gray - off state */
+    border: 2px solid transparent;
+    border-radius: 15px;
+    box-shadow: inset 0 1px 2px rgba(90, 97, 105, 0.15);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    height: 1.5rem;
+    padding: 0 0.1875rem;
+    position: relative;
+    transition: background-color 0.2s cubic-bezier(0.4, 0, 0.1, 1), border-color 0.2s cubic-bezier(0.4, 0, 0.1, 1);
+    width: 2.75rem;
+    box-sizing: border-box;
+}
+
+/* Toggle Handle - GF .gform-field__toggle-switch style */
+.acc-toggle-slider::before {
+    /* X icon for off state */
+    background: #fff center no-repeat url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGQ9Ik0yLjQ3NDkgMi41MjUxYS41ODMzLjU4MzMgMCAwMDAgLjgyNUw0LjEyNDggNWwtMS42NSAxLjY1YS41ODMzLjU4MzMgMCAxMC44MjUuODI0OWwxLjY1LTEuNjUgMS42NDk5IDEuNjVhLjU4MzMuNTgzMyAwIDEwLjgyNS0uODI1TDUuNzc0NiA1bDEuNjUtMS42NWEuNTgzMy41ODMzIDAgMTAtLjgyNS0uODI0OWwtMS42NSAxLjY1LTEuNjQ5OS0xLjY1YS41ODMzLjU4MzMgMCAwMC0uODI1IDB6IiBmaWxsPSIjOTA5MkIyIi8+PC9zdmc+);
+    background-size: 0.625rem;
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(24, 24, 72, 0.12);
+    content: "";
+    display: block;
+    height: 1.125rem;
+    width: 1.125rem;
+    flex-shrink: 0;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.1, 1), background 0.2s cubic-bezier(0.4, 0, 0.1, 1);
+    transform: translateX(0);
+}
+
+/* Checked State - On (blue background) */
+.acc-toggle-switch input[type="checkbox"]:checked + .acc-toggle-slider {
+    background: #3e7da6; /* GF blue - on state */
+}
+
+/* Move handle to right when checked and show checkmark */
+.acc-toggle-switch input[type="checkbox"]:checked + .acc-toggle-slider::before {
+    /* Checkmark SVG for on state */
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOCIgaGVpZ2h0PSI3IiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0yLjY2NjcgNC4zOTA1TDYuODYxOS4xOTUzYS42NjY3LjY2NjcgMCAwMS45NDI4Ljk0MjhsLTUuMTM4IDUuMTM4TC4xOTUzIDMuODA0N2EuNjY2Ny42NjY3IDAgMDEuOTQyOC0uOTQyOGwxLjUyODYgMS41Mjg2eiIgZmlsbD0iIzNFN0RBNiIvPjwvc3ZnPg==);
+    background-size: 0.625rem;
+    transform: translateX(1.25rem);
+}
+
+/* ==========================================================================
+   Rules Container - GF Flyout Style
+   ========================================================================== */
+
+#acc-rules-container {
+    margin-top: 0;
+}
+
+/* Logic Type Row - GF action style */
+.acc-logic-type-row {
+    margin-bottom: 22px;
+    font-size: 0.8125rem;
+    color: #242748;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.acc-logic-type-row select {
+    margin: 0;
+    width: auto;
+    min-width: 0;
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Rule Rows - GF Flyout Style
+   ========================================================================== */
+
+#acc-rules-list {
+    margin-bottom: 15px;
+}
+
+.acc-rule-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+    margin-bottom: 10px;
+    align-items: center;
+    padding: 0;
+}
+
+.acc-rule-row:first-child {
+    margin-top: 10px;
+}
+
+.acc-rule-row:last-child {
+    margin-bottom: 0;
+}
+
+/* Field Select - GF Flyout Style */
+.acc-field-select {
+    min-width: 0;
+    min-height: 2.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1 1 auto;
+    max-width: 45%;
+    margin-right: 0;
+}
+
+/* Operator Select */
+.acc-operator-select {
+    width: auto !important;
+    min-width: 0 !important;
+    flex-shrink: 0;
+    min-height: 2.25rem;
+    margin-right: 0;
+    max-width: 80px;
+}
+
+/* Value Input - GF Flyout Style */
+.acc-value-container {
+    flex: 1;
+}
+
+.acc-value-input,
+.acc-value-select {
+    min-width: 120px;
+    min-height: 2.25rem;
+    width: 100%;
+}
+
+@media (min-width: 1280px) {
+    .acc-value-input {
+        flex: 1;
+        width: auto;
+    }
+}
+
+.acc-value-input.hidden,
+.acc-value-select.hidden {
+    display: none;
+}
+
+/* Rule Controls - GF Flyout Style (Add/Delete buttons) */
+.acc-rule-buttons {
+    display: flex;
+    gap: 4px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    width: 3.75rem;
+}
+
+.acc-add-rule-btn,
+.acc-remove-rule {
+    background: #fff;
+    border: 1px solid #c3c5db;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+    padding: 0;
+    color: #3e7da6;
+    position: relative;
+    top: 0;
+}
+
+.acc-add-rule-btn:hover,
+.acc-add-rule-btn:focus,
+.acc-remove-rule:hover,
+.acc-remove-rule:focus {
+    border-color: #3e7da6;
+    background: #f0f6fa;
+    outline: none;
+}
+
+.acc-add-rule-btn .dashicons,
+.acc-remove-rule .dashicons {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+}
+
+/* Single delete button visibility - GF style */
+.acc-remove-rule.single-rule {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.acc-remove-rule.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Add Rule Link Button - GF Style */
+#acc-add-rule {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #3e7da6;
+    text-decoration: none;
+    font-size: 0.8125rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+#acc-add-rule:hover,
+#acc-add-rule:focus {
+    color: #2d6285;
+    text-decoration: underline;
+    outline: none;
+}
+
+#acc-add-rule .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+/* ==========================================================================
+   Select and Input Styling - Match GF Flyout
+   ========================================================================== */
+
+.gf-acc-modal-body select,
+.gf-acc-modal-body input[type="text"] {
+    font-size: 0.8125rem;
+    border: 1px solid #c3c5db;
+    border-radius: 4px;
+    padding: 0.375rem 0.5rem;
+    background: #fff;
+    color: #242748;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+/* Logic type and action type dropdowns - auto width */
+#acc-logic-type,
+#acc-action-type {
+    width: auto !important;
+/*    min-width: 0 !important;
+    max-width: 200px; */
+}
+
+.gf-acc-modal-body select:hover,
+.gf-acc-modal-body input[type="text"]:hover {
+    border-color: #9092b2;
+}
+
+.gf-acc-modal-body select:focus,
+.gf-acc-modal-body input[type="text"]:focus {
+    border-color: #3e7da6;
+    box-shadow: 0 0 0 1px #3e7da6;
+    outline: none;
+}
+
+/* ==========================================================================
+   RTL Support
+   ========================================================================== */
+
+html[dir="rtl"] .gf-acc-close-modal {
+    right: auto;
+    left: 1.5625rem;
+}
+
+html[dir="rtl"] .gf-acc-modal-header {
+    text-align: right;
+}
+
+html[dir="rtl"] .gf-acc-modal-header h2 {
+    padding-right: 0;
+    padding-left: 2rem;
+}
+
+html[dir="rtl"] .gf-acc-modal-body {
+    text-align: right;
+}
+
+html[dir="rtl"] .acc-rule-row select {
+    margin-left: 0.75rem;
+    margin-right: 0;
+}
+
+html[dir="rtl"] .gf-acc-modal-footer {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .gf-acc-modal-footer .button {
+    margin: 0;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media screen and (max-width: 782px) {
+    #gf-acc-modal {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .acc-rule-row {
+        flex-wrap: wrap;
+    }
+
+    .acc-field-select {
+        width: 100%;
+    }
+
+    .acc-operator-select {
+        flex: 1;
+    }
+
+    .acc-value-input,
+    .acc-value-select {
+        flex: 1;
+    }
+}
