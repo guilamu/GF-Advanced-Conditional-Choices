@@ -58,28 +58,19 @@
     function injectButtonsToCurrentField() {
         var field = GetSelectedField();
 
-        console.log('[GF-ACC] injectButtonsToCurrentField called');
-        console.log('[GF-ACC] Field:', field);
-
         if (!field || supportedTypes.indexOf(field.type) === -1) {
-            console.log('[GF-ACC] Field not supported or null, type:', field ? field.type : 'null');
             return;
         }
 
         if (!field.choices || field.choices.length === 0) {
-            console.log('[GF-ACC] No choices found');
             return;
         }
-
-        console.log('[GF-ACC] Field has', field.choices.length, 'choices');
 
         // Find the choices container - GF uses different selectors in different versions
         var $container = $('#field_choices');
         if (!$container.length) {
             $container = $('#gfield_settings_choices_container');
         }
-
-        console.log('[GF-ACC] Container found:', $container.length > 0, 'with', $container.find('li').length, 'li elements');
 
         $container.find('li').each(function(index) {
             var $row = $(this);
@@ -113,8 +104,6 @@
                 '</button>'
             );
 
-            console.log('[GF-ACC] Creating button for choice', index, ':', choice.text);
-
             // Insert before the add button (+ sign)
             var $addBtn = $row.find('.gf_insert_field_choice, .gform-choice__button--add');
             if ($addBtn.length) {
@@ -129,11 +118,8 @@
                 e.stopPropagation();
                 e.stopImmediatePropagation();
                 
-                console.log('[GF-ACC] Direct button click handler fired!');
                 handleButtonClick(index);
             });
-
-            console.log('[GF-ACC] Button appended to row', index);
         });
     }
 
@@ -141,18 +127,13 @@
      * Handle button click
      */
     function handleButtonClick(choiceIndex) {
-        console.log('[GF-ACC] handleButtonClick called with index:', choiceIndex);
-
         var field = GetSelectedField();
-        console.log('[GF-ACC] Selected field:', field);
 
         if (!field || !field.choices || !field.choices[choiceIndex]) {
-            console.log('[GF-ACC] Field or choice not found');
             return;
         }
 
         var choice = field.choices[choiceIndex];
-        console.log('[GF-ACC] Choice:', choice);
 
         // Initialize logic structure
         var logic = choice.conditionalLogic || {
@@ -166,8 +147,6 @@
             logic.rules = [{ fieldId: '', operator: 'is', value: '' }];
         }
 
-        console.log('[GF-ACC] Opening modal with logic:', logic);
-
         openModal(field, choiceIndex, choice, logic);
     }
 
@@ -178,8 +157,6 @@
         e.preventDefault();
         e.stopPropagation();
 
-        console.log('[GF-ACC] Delegated click handler fired!');
-
         var choiceIndex = $(this).data('index');
         handleButtonClick(choiceIndex);
     });
@@ -188,19 +165,11 @@
      * Open the configuration modal
      */
     function openModal(field, choiceIndex, choice, logic) {
-        console.log('[GF-ACC] openModal called');
-        console.log('[GF-ACC] field:', field);
-        console.log('[GF-ACC] choiceIndex:', choiceIndex);
-        console.log('[GF-ACC] choice:', choice);
-        console.log('[GF-ACC] logic:', logic);
-
         // Build rules HTML
         var rulesHtml = '';
         for (var i = 0; i < logic.rules.length; i++) {
             rulesHtml += getRuleRowHtml(field.id, logic.rules[i], i);
         }
-
-        console.log('[GF-ACC] Building modal HTML...');
 
         // Build modal HTML
         var modalHtml = 
@@ -243,17 +212,12 @@
                 '</div>' +
             '</div>';
 
-        console.log('[GF-ACC] Appending modal to body...');
         $('body').append(modalHtml);
-        console.log('[GF-ACC] Modal appended, checking if visible...');
-        console.log('[GF-ACC] Modal element exists:', $('#gf-acc-modal').length > 0);
 
         // Update value input visibility based on operator
         $('#acc-rules-list .acc-operator-select').each(function() {
             updateValueInputVisibility($(this));
         });
-
-        console.log('[GF-ACC] Modal setup complete');
     }
 
     /**
