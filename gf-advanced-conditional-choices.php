@@ -3,7 +3,7 @@
  * Plugin Name: GF Advanced Conditional Choices
  * Plugin URI: https://github.com/guilamu/gf-advanced-conditional-choices
  * Description: Add conditional logic to individual choices in Radio, Checkbox, Dropdown, and Multi-Select fields.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Guilamu
  * Author URI: https://github.com/guilamu
  * Text Domain: gf-advanced-conditional-choices
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'GF_ACC_VERSION', '1.0.0' );
+define( 'GF_ACC_VERSION', '1.0.1' );
 define( 'GF_ACC_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GF_ACC_URL', plugin_dir_url( __FILE__ ) );
 define( 'GF_ACC_FILE', __FILE__ );
@@ -144,6 +144,18 @@ add_filter( 'plugin_row_meta', function( array $links, string $file ): array {
     if ( GF_ACC_BASENAME !== $file ) {
         return $links;
     }
+
+    // "View details" thickbox link — same pattern as WordPress.org-hosted plugins.
+    $links[] = sprintf(
+        '<a href="%s" class="thickbox open-plugin-details-modal" aria-label="%s" data-title="%s">%s</a>',
+        esc_url( self_admin_url(
+            'plugin-install.php?tab=plugin-information&plugin=gf-advanced-conditional-choices'
+            . '&TB_iframe=true&width=772&height=926'
+        ) ),
+        esc_attr__( 'More information about GF Advanced Conditional Choices', 'gf-advanced-conditional-choices' ),
+        esc_attr__( 'GF Advanced Conditional Choices', 'gf-advanced-conditional-choices' ),
+        esc_html__( 'View details', 'gf-advanced-conditional-choices' )
+    );
 
     if ( class_exists( 'Guilamu_Bug_Reporter' ) ) {
         $links[] = sprintf(

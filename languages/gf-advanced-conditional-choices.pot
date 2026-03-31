@@ -2,7 +2,7 @@
 # This file is distributed under the AGPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: GF Advanced Conditional Choices 1.0.0\n"
+"Project-Id-Version: GF Advanced Conditional Choices 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/guilamu/gf-advanced-conditional-choices/issues\n"
 "POT-Creation-Date: 2026-02-02T00:00:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -94,7 +94,7 @@ msgid "Conditional Logic for choice"
 msgstr ""
 
 #: class-gf-acc.php
-msgid "Enable conditional logic for this choice"
+msgid "Enable Conditional Logic"
 msgstr ""
 
 #: class-gf-acc.php
@@ -145,11 +145,11 @@ msgstr ""
 msgid "Configure Choice Logic"
 msgstr ""
 
-#: class-gf-acc.php
+#: class-gf-acc.php includes/class-server-validation.php
 msgid "Please select a valid option."
 msgstr ""
 
-#: class-gf-acc.php
+#: class-gf-acc.php includes/class-server-validation.php
 msgid "No options available. Please adjust your previous selections."
 msgstr ""
 
@@ -161,22 +161,14 @@ msgstr ""
 msgid "Configure conditions to show or hide this individual choice based on values from other fields."
 msgstr ""
 
-#: includes/class-server-validation.php
-msgid "Please select a valid option."
-msgstr ""
-
-#: includes/class-server-validation.php
-msgid "No options available. Please adjust your previous selections."
-msgstr ""
-
 #: includes/class-github-updater.php
 msgid "Unable to rename the update folder. Please retry or update manually."
 msgstr ""
 
-#: includes/class-github-updater.php
-msgid "More information about %s"
+#: gf-advanced-conditional-choices.php
+msgid "More information about GF Advanced Conditional Choices"
 msgstr ""
 
-#: includes/class-github-updater.php
+#: gf-advanced-conditional-choices.php
 msgid "View details"
 msgstr ""

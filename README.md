@@ -1,5 +1,5 @@
 # GF Advanced Conditional Choices
-![Screenshot](https://github.com/guilamu/GF-Advanced-Conditional-Choices/blob/main/screenshot.jpg)
+
 Add conditional logic to individual choices within Gravity Forms Radio, Checkbox, Dropdown, Multi-Select, and Multiple Choice fields.
 
 ## Choice-Level Conditional Logic
@@ -102,6 +102,11 @@ A validation error is shown: "No options available. Please adjust your previous 
 ```
 
 ## Changelog
+
+### 1.0.1
+- Rewritten GitHub auto-updater to match reference template (README.md parsing, Parsedown, CSS injection, table-to-div conversion, GF sidebar info)
+- Added "View details" thickbox modal link in plugin row meta
+- Added Parsedown.php dependency for Markdown-to-HTML conversion
 
 ### 1.0.0
 - Initial release

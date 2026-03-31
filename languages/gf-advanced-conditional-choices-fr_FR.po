@@ -3,11 +3,11 @@
 # French translation for GF Advanced Conditional Choices
 msgid ""
 msgstr ""
-"Project-Id-Version: GF Advanced Conditional Choices 1.0.0\n"
+"Project-Id-Version: GF Advanced Conditional Choices 1.0.1\n"
 "Report-Msgid-Bugs-To: https://github.com/guilamu/gf-advanced-conditional-"
 "choices/issues\n"
 "POT-Creation-Date: 2026-02-02T00:00:00+00:00\n"
-"PO-Revision-Date: 2026-02-02 21:49+0100\n"
+"PO-Revision-Date: 2026-03-31 14:40+0200\n"
 "Last-Translator: Guilamu <contact@guilamu.com>\n"
 "Language-Team: French\n"
 "Language: fr_FR\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.8\n"
 
 #. Plugin URI of the plugin
 msgid "https://github.com/guilamu/gf-advanced-conditional-choices"
@@ -180,10 +180,10 @@ msgstr ""
 "Impossible de renommer le dossier de mise à jour. Veuillez réessayer ou "
 "mettre à jour manuellement."
 
-#: includes/class-github-updater.php
-msgid "More information about %s"
-msgstr "Plus d'informations sur %s"
+#: gf-advanced-conditional-choices.php
+msgid "More information about GF Advanced Conditional Choices"
+msgstr "Plus d'informations sur GF Choix Conditionnels Avancés"
 
-#: includes/class-github-updater.php
+#: gf-advanced-conditional-choices.php
 msgid "View details"
 msgstr "Voir les détails"
