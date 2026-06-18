@@ -29,6 +29,41 @@ class GF_ACC_Server_Validation {
     }
 
     /**
+     * Check if a form has any fields with conditional choice logic enabled.
+     *
+     * Used to skip processing on forms that don't use the plugin,
+     * preventing false validation failures caused by sanitization mismatches.
+     *
+     * @param array $form The form object.
+     * @return bool True if the form uses conditional choices on at least one choice.
+     */
+    private static function form_has_conditional_choices( array $form ): bool {
+        if ( ! isset( $form['fields'] ) || ! is_array( $form['fields'] ) ) {
+            return false;
+        }
+
+        foreach ( $form['fields'] as $field ) {
+            if ( ! in_array( $field->type, GF_Advanced_Conditional_Choices::SUPPORTED_FIELD_TYPES, true ) ) {
+                continue;
+            }
+
+            if ( ! isset( $field->choices ) || ! is_array( $field->choices ) ) {
+                continue;
+            }
+
+            foreach ( $field->choices as $choice ) {
+                $logic = $choice['conditionalLogic'] ?? null;
+
+                if ( $logic && ! empty( $logic['enabled'] ) ) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Validate that submitted choice values are currently visible.
      *
      * @param array $validation_result The validation result.
@@ -36,6 +71,12 @@ class GF_ACC_Server_Validation {
      */
     public static function validate_conditional_choices( array $validation_result ): array {
         $form = $validation_result['form'];
+
+        // Skip forms that don't use conditional choices at all.
+        if ( ! self::form_has_conditional_choices( $form ) ) {
+            return $validation_result;
+        }
+
         $values = self::get_submitted_values( $form );
 
         foreach ( $form['fields'] as &$field ) {
@@ -46,6 +87,11 @@ class GF_ACC_Server_Validation {
 
             // Skip if field has no choices
             if ( ! isset( $field->choices ) || ! is_array( $field->choices ) ) {
+                continue;
+            }
+
+            // Skip fields that don't have any conditional choice logic
+            if ( ! self::field_has_conditional_choices( $field ) ) {
                 continue;
             }
 
@@ -105,6 +151,11 @@ class GF_ACC_Server_Validation {
      * @return void
      */
     public static function sanitize_hidden_choices( array $form ): void {
+        // Skip forms that don't use conditional choices at all.
+        if ( ! self::form_has_conditional_choices( $form ) ) {
+            return;
+        }
+
         $values = self::get_submitted_values( $form );
 
         foreach ( $form['fields'] as $field ) {
@@ -118,6 +169,11 @@ class GF_ACC_Server_Validation {
                 continue;
             }
 
+            // Skip fields that don't have any conditional choice logic
+            if ( ! self::field_has_conditional_choices( $field ) ) {
+                continue;
+            }
+
             // Get visible choices
             $visible_choices = GF_ACC_Choice_Conditions::get_visible_choices( $form, $field, $values );
 
@@ -128,7 +184,7 @@ class GF_ACC_Server_Validation {
                     $input_name = 'input_' . str_replace( '.', '_', $input['id'] );
                     
                     if ( isset( $_POST[ $input_name ] ) ) {
-                        $value = sanitize_text_field( wp_unslash( $_POST[ $input_name ] ) );
+                        $value = wp_unslash( $_POST[ $input_name ] );
                         
                         if ( ! in_array( $value, $visible_choices, true ) ) {
                             $_POST[ $input_name ] = '';
@@ -145,14 +201,14 @@ class GF_ACC_Server_Validation {
                     if ( is_array( $value ) ) {
                         // Multi-select
                         $_POST[ $input_name ] = array_filter(
-                            array_map( 'sanitize_text_field', wp_unslash( $value ) ),
+                            wp_unslash( $value ),
                             function( $v ) use ( $visible_choices ) {
                                 return in_array( $v, $visible_choices, true );
                             }
                         );
                     } else {
                         // Radio, Select
-                        $value = sanitize_text_field( wp_unslash( $value ) );
+                        $value = wp_unslash( $value );
                         
                         if ( ! in_array( $value, $visible_choices, true ) ) {
                             $_POST[ $input_name ] = '';
@@ -164,7 +220,34 @@ class GF_ACC_Server_Validation {
     }
 
     /**
+     * Check if a specific field has any choices with conditional logic enabled.
+     *
+     * @param GF_Field $field The field object.
+     * @return bool True if at least one choice has conditional logic enabled.
+     */
+    private static function field_has_conditional_choices( $field ): bool {
+        if ( ! isset( $field->choices ) || ! is_array( $field->choices ) ) {
+            return false;
+        }
+
+        foreach ( $field->choices as $choice ) {
+            $logic = $choice['conditionalLogic'] ?? null;
+
+            if ( $logic && ! empty( $logic['enabled'] ) ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Get all submitted field values from the form.
+     *
+     * Values are unslashed but NOT passed through sanitize_text_field(),
+     * because that function strips tabs and compresses whitespace,
+     * which would cause mismatches when comparing against choice values
+     * stored in the form definition.
      *
      * @param array $form The form object.
      * @return array Associative array of field_id => value.
@@ -179,7 +262,7 @@ class GF_ACC_Server_Validation {
                     $input_name = 'input_' . str_replace( '.', '_', $input['id'] );
                     
                     if ( isset( $_POST[ $input_name ] ) ) {
-                        $values[ $input['id'] ] = sanitize_text_field( wp_unslash( $_POST[ $input_name ] ) );
+                        $values[ $input['id'] ] = wp_unslash( $_POST[ $input_name ] );
                     }
                 }
             } else {
@@ -190,9 +273,9 @@ class GF_ACC_Server_Validation {
                     $value = $_POST[ $input_name ];
                     
                     if ( is_array( $value ) ) {
-                        $values[ $field->id ] = array_map( 'sanitize_text_field', wp_unslash( $value ) );
+                        $values[ $field->id ] = wp_unslash( $value );
                     } else {
-                        $values[ $field->id ] = sanitize_text_field( wp_unslash( $value ) );
+                        $values[ $field->id ] = wp_unslash( $value );
                     }
                 }
             }
@@ -203,6 +286,11 @@ class GF_ACC_Server_Validation {
 
     /**
      * Get the submitted value for a specific field.
+     *
+     * Values are unslashed but NOT passed through sanitize_text_field(),
+     * because that function strips tabs and compresses whitespace,
+     * which would cause mismatches when comparing against choice values
+     * stored in the form definition.
      *
      * @param GF_Field $field The field object.
      * @return mixed The submitted value.
@@ -215,7 +303,7 @@ class GF_ACC_Server_Validation {
                 $input_name = 'input_' . str_replace( '.', '_', $input['id'] );
                 
                 if ( isset( $_POST[ $input_name ] ) && ! empty( $_POST[ $input_name ] ) ) {
-                    $values[] = sanitize_text_field( wp_unslash( $_POST[ $input_name ] ) );
+                    $values[] = wp_unslash( $_POST[ $input_name ] );
                 }
             }
             
@@ -231,9 +319,9 @@ class GF_ACC_Server_Validation {
         $value = $_POST[ $input_name ];
 
         if ( is_array( $value ) ) {
-            return array_map( 'sanitize_text_field', wp_unslash( $value ) );
+            return wp_unslash( $value );
         }
 
-        return sanitize_text_field( wp_unslash( $value ) );
+        return wp_unslash( $value );
     }
 }

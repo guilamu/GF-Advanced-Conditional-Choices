@@ -3,7 +3,7 @@
  * Plugin Name: GF Advanced Conditional Choices
  * Plugin URI: https://github.com/guilamu/gf-advanced-conditional-choices
  * Description: Add conditional logic to individual choices in Radio, Checkbox, Dropdown, and Multi-Select fields.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Guilamu
  * Author URI: https://github.com/guilamu
  * Text Domain: gf-advanced-conditional-choices
@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'GF_ACC_VERSION', '1.0.1' );
+define( 'GF_ACC_VERSION', '1.0.2' );
 define( 'GF_ACC_PATH', plugin_dir_path( __FILE__ ) );
 define( 'GF_ACC_URL', plugin_dir_url( __FILE__ ) );
 define( 'GF_ACC_FILE', __FILE__ );

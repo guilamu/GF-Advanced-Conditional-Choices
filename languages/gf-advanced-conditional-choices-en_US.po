@@ -2,7 +2,7 @@
 # This file is distributed under the AGPL-3.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: GF Advanced Conditional Choices 1.0.1\n"
+"Project-Id-Version: GF Advanced Conditional Choices 1.0.2\n"
 "Report-Msgid-Bugs-To: https://github.com/guilamu/gf-advanced-conditional-choices/issues\n"
 "POT-Creation-Date: 2026-02-02T00:00:00+00:00\n"
 "PO-Revision-Date: 2026-02-02T00:00:00+00:00\n"
