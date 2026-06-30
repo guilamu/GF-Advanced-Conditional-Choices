@@ -1,6 +1,6 @@
 # GF Advanced Conditional Choices
 
-[Screenshot](https://github.com/guilamu/GF-Advanced-Conditional-Choices/blob/main/screenshot.jpg)
+![Screenshot](https://github.com/guilamu/GF-Advanced-Conditional-Choices/blob/main/screenshot.jpg)
 
 Add conditional logic to individual choices within Gravity Forms Radio, Checkbox, Dropdown, Multi-Select, and Multiple Choice fields.
 
